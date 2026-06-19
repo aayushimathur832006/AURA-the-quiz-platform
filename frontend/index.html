@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <title>AURA - Dynamic Assessment Engine</title>
+
+    <style>
+      :root {
+  
+        --bg-mainframe: #030712;
+        --glass-bg: rgba(17, 24, 39, 0.75);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        
+        --neon-cyan: #0284c7;
+        --neon-cyan-glow: rgba(2, 132, 199, 0.25);
+        
+        --neon-purple: #7c3aed;
+        --neon-purple-glow: rgba(124, 58, 237, 0.25);
+        
+        --neon-pink: #e11d48;
+        --neon-pink-glow: rgba(225, 29, 72, 0.25);
+        
+        --terminal-green: #10b981;
+        
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --text-dark-label: #64748b;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-mainframe);
+        color: var(--text-primary);
+        font-family: 'Space Grotesk', sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-mainframe);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(2, 132, 199, 0.3);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--neon-cyan);
+        box-shadow: 0 0 8px var(--neon-cyan-glow);
+      }
+
+   
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
