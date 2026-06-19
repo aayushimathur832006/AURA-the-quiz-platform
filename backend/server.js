@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -124,6 +125,23 @@ app.post('/api/submit', async (req, res) => {
         return res.status(500).json({ success: false, message: "Submission error" });
     }
 });
+app.get('/api/test', async (req, res) => {
+  try {
+    const count = await Question.countDocuments();
+    res.json({
+      success: true,
+      count
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

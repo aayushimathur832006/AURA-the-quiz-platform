@@ -94,6 +94,7 @@ function CoreApp() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+
   // const initializeAssessmentMode = async (trackType, qty) => {
   //   try {
   //     const response = await fetch('http://localhost:5000/api/generate', {
@@ -137,53 +138,78 @@ function CoreApp() {
   //   }
   // };
    const initializeAssessmentMode = async (trackType, qty) => {
-    try {
-      const response = await fetch('https://aura-the-quiz-platform.onrender.com/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+  try {
+    console.log("Track Type:", trackType);
+
+    const response = await fetch(
+      "https://aura-the-quiz-platform.onrender.com/api/generate",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           userId: user?._id || user?.id || null,
           domain: trackType,
           totalQuestions: qty,
           durationMinutes: 10,
-          topic: trackType === 'production' ? selectedProductionTopic : null
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to generate custom sandbox deployment deck");
+          topic:
+            trackType === "production"
+              ? selectedProductionTopic
+              : null,
+        }),
       }
-      
-      const payload = await response.json();
-      
-      if (payload.quizDeck && payload.quizDeck.length > 0) {
-        let formattedQuestions = payload.quizDeck.map((q, index) => ({
-          id: q._id || `NODE_${Date.now()}_${index}`,
-          q: q.question || q.q, 
-          o: q.options || q.o,
-          a: q.correctOptionIndex !== undefined ? q.correctOptionIndex : q.a,
-          domain: trackType
-        }));
+    );
 
-        // 🔥 Randomize/Shuffle logic added to prevent question repetition pattern
-        for (let i = formattedQuestions.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [formattedQuestions[i], formattedQuestions[j]] = [formattedQuestions[j], formattedQuestions[i]];
-        }
+    console.log("Status:", response.status);
 
-        setCurrentScore(0);
-        setActiveQuestions(formattedQuestions);
-        setCurrentQuestionIndex(0);
-        setSelectedOption(null);
-        setTimeLeft(600);
-        setIsSandboxRunning(true);
-        setActiveTab('quiz-portal');
-      }
-    } catch (err) {
-      console.error(err);
-      alert("API Routing Error: Check network log pipelines.");
+    const payload = await response.json();
+    console.log("Payload:", payload);
+
+    if (!response.ok) {
+      throw new Error(
+        payload.message ||
+          "Failed to generate custom sandbox deployment deck"
+      );
     }
-  };
+
+    if (!payload.quizDeck || payload.quizDeck.length === 0) {
+      alert(`No questions found for "${trackType}"`);
+      return;
+    }
+
+    let formattedQuestions = payload.quizDeck.map((q, index) => ({
+      id: q._id || `NODE_${Date.now()}_${index}`,
+      q: q.question || q.q,
+      o: q.options || q.o,
+      a:
+        q.correctOptionIndex !== undefined
+          ? q.correctOptionIndex
+          : q.a,
+      domain: trackType,
+    }));
+
+    // Shuffle questions
+    for (let i = formattedQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [formattedQuestions[i], formattedQuestions[j]] = [
+        formattedQuestions[j],
+        formattedQuestions[i],
+      ];
+    }
+
+    setCurrentScore(0);
+    setActiveQuestions(formattedQuestions);
+    setCurrentQuestionIndex(0);
+    setSelectedOption(null);
+    setTimeLeft(600);
+    setIsSandboxRunning(true);
+    setActiveTab("quiz-portal");
+  } catch (err) {
+    console.error("FULL ERROR:", err);
+    alert(err.message);
+  }
+};
   const processNextQuestion = () => {
     if (selectedOption === null) return;
     const currentCorrect = activeQuestions[currentQuestionIndex].a;

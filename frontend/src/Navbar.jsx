@@ -1,6 +1,7 @@
 import React from 'react';
 
 
+
 export default function Navbar({ activeTab, setActiveTab, isSandboxRunning, user, logout }) {
   return (
     <header className="mainframe-navbar" style={{
