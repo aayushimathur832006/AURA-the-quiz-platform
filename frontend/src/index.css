@@ -226,7 +226,7 @@ body {
   width: 5px;
   height: 5px;
   background-color: var(--neon-cyan);
-  border-radius: 50%;
+  border-radius: 51%;
   animation: pulse-glow 2s infinite;
 }
 
