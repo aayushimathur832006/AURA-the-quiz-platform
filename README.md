@@ -20,3 +20,5 @@ AURA Engine is a futuristic, terminal-styled assessment and sandbox environment 
 2. Install backend dependencies and start the server (`node server.js`).
 3. Install frontend dependencies and start the dev server (`npm run dev`).
 4. Make sure your local MongoDB instance/cluster is running.
+
+Live Link->https://aura-quiz-platform.netlify.app/
