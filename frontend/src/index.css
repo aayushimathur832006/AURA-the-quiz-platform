@@ -41,7 +41,6 @@ body {
   overflow-x: hidden;
 }
 
-/* --- MOTION & ANIMATIONS --- */
 .animate-fade {
   animation: elegantReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -57,7 +56,6 @@ body {
   100% { transform: scale(0.8); opacity: 0.5; }
 }
 
-/* --- STRUCTURAL FLUID CANVAS BACKGROUNDS --- */
 .canvas-matrix {
   position: absolute;
   inset: 0;
@@ -66,7 +64,6 @@ body {
   overflow: hidden;
 }
 
-/* Stronger, highly visible light cyber grid system */
 .matrix-grid {
   position: absolute;
   inset: 0;
@@ -76,7 +73,6 @@ body {
   background-size: 45px 45px;
 }
 
-/* Ambient Premium Light Clouds */
 .glow-orb-1 {
   position: absolute;
   width: 700px;
@@ -251,7 +247,6 @@ body {
   margin: 0.4rem auto 0 auto;
 }
 
-/* --- HIGH-SPEC LANDING SYSTEM --- */
 .hero-canvas {
   min-height: 75vh;
   display: flex;
@@ -496,7 +491,6 @@ body {
   box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
 }
 
-/* --- TELEMETRY TRACKER WIDGETS --- */
 .telemetry-dashboard {
   display: flex;
   flex-direction: column;
@@ -521,7 +515,6 @@ body {
   margin-top: 0.15rem;
 }
 
-/* --- FORM ARCHITECTURE ARCHETYPE (NEW GATEWAY OVERRIDES) --- */
 .form-shell-center {
   display: flex;
   justify-content: center;
