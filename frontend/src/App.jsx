@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
 
 export const useAuth = () => useContext(AuthContext);
 
-// 🌤️ Compact Gauge Component mapped to Light Architecture
 const RadialGauge = ({ percentage, size = 65 }) => {
   const radius = 24;
   const circumference = 2 * Math.PI * radius;
@@ -58,7 +57,7 @@ const RadialGauge = ({ percentage, size = 65 }) => {
 };
 
 function CoreApp() {
-  // 🔥 FIX 1: logout function ko bhi context se nikal liya yahan
+
   const { user, logout } = useAuth(); 
   const [activeTab, setActiveTab] = useState('dashboard'); 
   const [targetQuantity, setTargetQuantity] = useState(20);
@@ -95,48 +94,7 @@ function CoreApp() {
   };
 
 
-  // const initializeAssessmentMode = async (trackType, qty) => {
-  //   try {
-  //     const response = await fetch('http://localhost:5000/api/generate', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         userId: user?._id || user?.id || null,
-  //         domain: trackType,
-  //         totalQuestions: qty,
-  //         durationMinutes: 10,
-  //         topic: trackType === 'production' ? selectedProductionTopic : null
-  //       })
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to generate custom sandbox deployment deck");
-  //     }
-      
-  //     const payload = await response.json();
-      
-  //     if (payload.quizDeck && payload.quizDeck.length > 0) {
-  //       const formattedQuestions = payload.quizDeck.map((q, index) => ({
-  //         id: q._id || `NODE_${Date.now()}_${index}`,
-  //         q: q.question || q.q, 
-  //         o: q.options || q.o,
-  //         a: q.correctOptionIndex !== undefined ? q.correctOptionIndex : q.a,
-  //         domain: trackType
-  //       }));
-
-  //       setCurrentScore(0);
-  //       setActiveQuestions(formattedQuestions);
-  //       setCurrentQuestionIndex(0);
-  //       setSelectedOption(null);
-  //       setTimeLeft(600);
-  //       setIsSandboxRunning(true);
-  //       setActiveTab('quiz-portal');
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("API Routing Error: Check network log pipelines.");
-  //   }
-  // };
+  
    const initializeAssessmentMode = async (trackType, qty) => {
   try {
     console.log("Track Type:", trackType);
@@ -189,7 +147,6 @@ function CoreApp() {
       domain: trackType,
     }));
 
-    // Shuffle questions
     for (let i = formattedQuestions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [formattedQuestions[i], formattedQuestions[j]] = [
@@ -259,12 +216,11 @@ function CoreApp() {
         <div className="glow-orb-2"></div>
       </div>
 
-      {/* 🔥 FIX 2: Navbar ko logout function pass kar diya */}
+    
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} isSandboxRunning={isSandboxRunning} logout={logout} />
       
       <main className="container-shell">
-        
-        {/* TAB 1: ACADEMIC SANDBOX MAPPER */}
+
         {activeTab === 'dashboard' && (
           <div className="polished-glass" style={{ borderRadius: '24px', padding: '3rem', maxWidth: '750px', margin: '0 auto', textAlign: 'center' }}>
             <div className="header-group" style={{ marginBottom: '2rem' }}>
@@ -305,7 +261,6 @@ function CoreApp() {
           </div>
         )}
 
-        {/* TAB 2: PRODUCTION HANGAR */}
         {activeTab === 'production-hangar' && (
           <div className="polished-glass" style={{ borderRadius: '24px', padding: '3rem', maxWidth: '800px', margin: '0 auto' }}>
             <div className="header-group">
@@ -350,13 +305,12 @@ function CoreApp() {
           </div>
         )}
 
-        {/* TAB 3: ACTIVE SYSTEM TESTING DECK */}
+   
         {activeTab === 'quiz-portal' && isSandboxRunning && activeQuestions.length > 0 && (
           <div className="quiz-hub-container" style={{ maxWidth: '1050px', margin: '0 auto', padding: '0.5rem 0' }}>
             <div className="polished-glass card-pod" style={{ padding: '2.25rem', borderRadius: '24px' }}>
               <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '2.5rem', alignItems: 'stretch' }}>
                 
-                {/* LEFT PANEL */}
                 <div style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', marginBottom: '1.5rem' }}>
@@ -374,7 +328,6 @@ function CoreApp() {
                   </div>
                 </div>
 
-                {/* RIGHT PANEL */}
                 <div style={{ flex: '1.2 1 450px', display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center', borderLeft: '1px solid var(--glass-border)', paddingLeft: '2rem' }} className="quiz-options-right-panel">
                   <div className="options-stack" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {activeQuestions[currentQuestionIndex].o.map((option, idx) => {
