@@ -80,7 +80,6 @@ app.post('/api/generate', async (req, res) => {
 
         console.log(" Running Direct DB Query with:", matchQuery);
 
-        // Database se questions nikaal rahe hain
         let questions = await Question.find(matchQuery).limit(limit);
 
         console.log(` Database found exactly ${questions.length} questions.`);
